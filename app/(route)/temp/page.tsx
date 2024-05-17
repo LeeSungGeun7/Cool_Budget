@@ -9,6 +9,7 @@ import { expense, profit } from '@/common/literal';
 import { BudgetFormSend } from './action';
 import debounce from 'lodash/debounce' 
 import { useSession } from 'next-auth/react';
+import moment from 'moment';
 
 
 
@@ -61,8 +62,9 @@ const Items = memo(({category,handleCategorySelect}:any) => {
 const Page = memo(() => {
     const user = useSession()
 
-    const [today, setToday] = useState(new Date()); 
+    const [today, setToday] = useState(moment(new Date).format('YYYY-MM-DD'));
 
+    
     const [type,setType] = useState(false);
 
     const [isOpen , setIsOpen] = useState(false);
@@ -152,7 +154,7 @@ className={`fixed flex justify-evenly items-center bottom-0 flex-col rounded-t-3
         </div>
 
         <div className='m-4 flex items-center'>
-                {`${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`}
+                {/* {`${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`} */}
                 <BsCalendar3 onClick={()=>{setIsOpen(true)}} className='ml-4'/>
                 <input  readOnly type="text" name="date" className='hidden' value={today+""} />
                 <input  type="text" name="type" className={`${state?.fieldErrors.type} hidden`} value={type+""} readOnly />

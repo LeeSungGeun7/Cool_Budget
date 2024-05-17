@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    
+    env:{
+      NEXTAUTH_SECRET:"WABCnWuLX1htQ9nA3LNycvfugzVUdKADzNAv9TG2zo8=",
+    } , 
     async headers() {
         return [
             {
@@ -52,6 +56,7 @@ const nextConfig = {
           }
         ],
       },    
+      
       
 };
 

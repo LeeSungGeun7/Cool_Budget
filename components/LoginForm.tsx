@@ -16,12 +16,18 @@ function LoginForm() {
         
         if (email.length > 1 && password.length > 1) {
         setLoading(true);    
-        const res = await Login(email,password);
+       // const res = await Login(email,password);
         setLoading(false);    
-        if (res) {
-            signIn()
+ 
+        const res = await signIn('credentials',{
+            email: email,
+            password: password
+        })
+
+        if (res?.ok) {
+            alert("로그인성공")
         } else {
-            alert("로그인 실패");
+            alert("실패")
         }
         
     }   else if (email.length < 1) {

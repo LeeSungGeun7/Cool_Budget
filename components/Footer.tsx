@@ -25,7 +25,7 @@ function Footer() {
   const isMobile = useIsMobile()
   const [bottomUp , setBottomUp] = useState(false);
 
-  const LinkComponent = 'bg-black w-[25%] h-[100%] flex justify-center items-center m-4'
+  const LinkComponent = ' w-[25%] h-[100%] flex justify-center items-center m-4'
   
 
 
@@ -33,10 +33,10 @@ function Footer() {
   if (isMobile && !bottomUp) {
     return(
       <>
-    <div className='relative text-white flex justify-evenly items-center w-full h-[70px] bg-slate-100'>
+    <div className='relative text-white flex justify-evenly items-center w-full h-[70px] '>
         <LinkClick className={`${LinkComponent}`} href='' name='1' />
         <LinkClick className={`${LinkComponent}`} href='login' name='2' />
-        <button onClick={()=>{setBottomUp(!bottomUp);console.log(bottomUp)}} className='flex text-black items-center justify-center rounded-full  absolute  w-[50px] h-[50px] bg-white'><FaPlus/></button>
+        <button onClick={()=>{setBottomUp(!bottomUp);console.log(bottomUp)}} className='flex text-white items-center justify-center rounded-full  absolute  w-[50px] h-[50px] bg-black'><FaPlus/></button>
         <LinkClick className={`${LinkComponent}`} href='' name='3' />
         <LinkClick className={`${LinkComponent}`} href='' name='4' />
     </div>
