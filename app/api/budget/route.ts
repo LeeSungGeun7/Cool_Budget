@@ -46,6 +46,7 @@ export async function POST(req:NextRequest,res:any) {
           date_lte: "${endMonth}"
           category: {type: "${type? type : "expense"}"}
           }
+          orderBy: amount_DESC
           ) {
             category {
               name

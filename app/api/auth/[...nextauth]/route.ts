@@ -8,6 +8,7 @@ import { Login } from '@/app/(route)/login/action';
 // 필요에 따라 Provider를 추가할 수 있습니다.
 
 import { User } from "next-auth"
+import { isExistUser, socialRegister } from '@/app/(route)/register/action';
 
 interface CustomUser extends User {
   id: string
@@ -15,6 +16,32 @@ interface CustomUser extends User {
   name: string
   // 추가적인 사용자 정보 필드
 }
+
+
+export interface Root {
+  user: User1
+  expires: string
+}
+
+export interface User1 {
+  name: string
+  email: string
+  picture: string
+  sub: string
+  user: User2
+  id: string
+  image: string
+  iat: number
+  exp: number
+  jti: string
+}
+
+export interface User2 {
+  id: string
+  email: string
+}
+
+
 
 export const authOptions = {
     pages: {
@@ -63,21 +90,40 @@ export const authOptions = {
   ],
 
   callbacks: {
-
     async jwt({ token, user }:any) {
       if (user) {
         token.user = {
           id: user.id,
           email : user.email
         }
+      
       }
       return { ...token, ...user };
     },
 
     async session({ session, token }:any) {
+
       session.user = token as any;
+
+      await socialRegister(session.user.email,`${session.user.picture || "defalut"}`,"social")
+
       return session;
     },
+    
+    // async signIn({ user, account, profile, email, credentials }:any) {
+    //   // 인증 처리 로직
+      
+    //   const res = await socialRegister(email,`${profile || "defalut"}`,`${ account.provider|| "None"}`)
+    //   // 인증 성공 시
+
+
+    //   return true;
+      
+
+    //   // 인증 실패 시
+    //   return false;
+    // }
+    
   },
 
 

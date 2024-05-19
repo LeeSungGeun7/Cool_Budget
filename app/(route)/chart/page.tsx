@@ -1,87 +1,87 @@
-// "use client"
-// import Chart from '@/components/Chart';
-// import moment from 'moment';
-// import React, { Suspense, useCallback, useState } from 'react';
+"use client"
+import Chart from '@/components/Chart';
+import moment from 'moment';
+import React, { Suspense, useCallback, useState } from 'react';
 
 
-// const Div = () => {
-//   return(
-//     <>
-//       <div className="h-[100vh] w-full">
-//           cd
-//       </div>
-//     </>
-//   )
-// }
+const Div = () => {
+  return(
+    <>
+      <div className="h-[100vh] w-full">
+          cd
+      </div>
+    </>
+  )
+}
 
 
 
-// const Home = React.memo(() => {
-//   const date = moment();
+const Home = React.memo(() => {
+  const date = moment();
 
-//   const week = date.subtract(7,"day").format('YYYY-MM-DD');
+  const week = date.subtract(7,"day").format('YYYY-MM-DD');
 
   
 
-//   //const endMonth = date.add(1, 'month').format('YYYY-MM-01') ;
+  //const endMonth = date.add(1, 'month').format('YYYY-MM-01') ;
 
 
 
-//   const mt = moment();
+  const mt = moment();
   
-//   // startMonth.subtract(1,'month').format('YYYY-MM-01')
+  // startMonth.subtract(1,'month').format('YYYY-MM-01')
 
-//   const startMonth = moment(mt.format('YYYY-MM-01'))
+  const startMonth = moment(mt.format('YYYY-MM-01'))
 
-//   const [month,setMonth] = useState(startMonth);
+  const [month,setMonth] = useState(startMonth);
 
-//   const [type , setType] = useState("expense");
+  const [type , setType] = useState("expense");
 
 
 
-//   const [endMonth,setendMonth] = useState(month.clone().add(1,'month'))
+  const [endMonth,setendMonth] = useState(month.clone().add(1,'month'))
 
-//   const handleMonth = (type:boolean) => {
-//     if (type) {
-//       const clone = month.clone().add(1 , 'month')
-//       if (clone){
-//         setMonth(clone);
-//         setendMonth(month.clone().add(2,'month'))
-//       }     
-//     } else {
-//       const clone = month.clone().subtract(1, 'month');
-//       setMonth(clone);
-//       setendMonth(month.clone().subtract(0,'month'))
-//     }
+  const handleMonth = (type:boolean) => {
+    if (type) {
+      const clone = month.clone().add(1 , 'month')
+      if (clone){
+        setMonth(clone);
+        setendMonth(month.clone().add(2,'month'))
+      }     
+    } else {
+      const clone = month.clone().subtract(1, 'month');
+      setMonth(clone);
+      setendMonth(month.clone().subtract(0,'month'))
+    }
     
-//   }
+  }
 
-//   const handleType =() => {
-//     if (type === "expense") {
-//       setType("income")
-//     } else {
-//       setType("expense")
-//     }
-//     console.log(type);
-//   }
+  const handleType =() => {
+    if (type === "expense") {
+      setType("income")
+    } else {
+      setType("expense")
+    }
+    console.log(type);
+  }
     
   
   
   
-//   return (
-//     <div className="relative w-full  h-screen flex justify-center items-center flex-col">
-//       <button onClick={()=>{handleType()}} className='z-[1000] absolute left-6 top-8 bg-slate-200 rounded-xl h-[30px] w-[50px]'>{type ==="expense" ? "지출":"수입"}</button>
-//       <div className='relative flex justify-center items-center w-[100%] h-[35%]'>
-//         <button className='text-[30px] absolute right-[30%] w-[50px] h-[50px]' onClick={()=>{handleMonth(true)}}>+</button> 
-//         <button className='text-[30px] absolute left-[30%] w-[50px] h-[50px]' onClick={()=>{handleMonth(false)}}>-</button>
-//           {month.format('YYYY-MM')}
-//       </div>
+  return (
+    <div className="relative w-full  h-screen flex justify-center items-center flex-col">
+      <button onClick={()=>{handleType()}} className='z-[1000] absolute left-6 top-8 bg-slate-200 rounded-xl h-[30px] w-[50px]'>{type ==="expense" ? "지출":"수입"}</button>
+      <div className='relative flex justify-center items-center w-[100%] h-[35%]'>
+        <button className='text-[30px] absolute right-[30%] w-[50px] h-[50px]' onClick={()=>{handleMonth(true)}}>+</button> 
+        <button className='text-[30px] absolute left-[30%] w-[50px] h-[50px]' onClick={()=>{handleMonth(false)}}>-</button>
+          {month.format('YYYY-MM')}
+      </div>
      
-//         <Chart endMonth={endMonth} month={month} type={type}/>
-//     </div>
-//   );
-// })
-// export default Home;
+        <Chart endMonth={endMonth} month={month} type={type}/>
+    </div>
+  );
+})
+export default Home;
 
 
 
@@ -242,14 +242,3 @@
 // }
 
 // export default Chart
-
-
-import React from 'react'
-
-function page() {
-  return (
-    <div className='h-screen'>page</div>
-  )
-}
-
-export default page

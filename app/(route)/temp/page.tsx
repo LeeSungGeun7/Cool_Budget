@@ -49,7 +49,7 @@ const Items = memo(({category,handleCategorySelect}:any) => {
     return(
     category.map((item:any,idx:number)=>{
         return(
-            <div onClick={()=>{handleCategorySelect(item.name)}} className={` active:bg-slate-100   flex rounded-lg ${item.selected ? "bg-blue-400" :"bg-slate-100" } justify-center items-center w-[80px] h-[50px]`} key={idx}>
+            <div onClick={()=>{handleCategorySelect(item.name)}} className={` active:bg-slate-100   flex rounded-lg ${item.selected ? "bg-blue-400" :"bg-slate-100" } justify-center items-center w-[95%] h-[90%]`} key={idx}>
                 {item.name}
             </div>
         )
@@ -154,7 +154,7 @@ className={`fixed flex justify-evenly items-center bottom-0 flex-col rounded-t-3
         </div>
 
         <div className='m-4 flex items-center'>
-                {/* {`${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`} */}
+                {`${today}`}
                 <BsCalendar3 onClick={()=>{setIsOpen(true)}} className='ml-4'/>
                 <input  readOnly type="text" name="date" className='hidden' value={today+""} />
                 <input  type="text" name="type" className={`${state?.fieldErrors.type} hidden`} value={type+""} readOnly />
@@ -168,7 +168,7 @@ className={`fixed flex justify-evenly items-center bottom-0 flex-col rounded-t-3
             <Input checkComplete={checkComplete} ref={ref1} label='ex) 병원' name="description" title='내용'/>
             <Input checkComplete={checkComplete} ref={ref2} type='number' name="amount" label='KRW' title='금액'/>
         </div>
-            <div className={`${state?.fieldErrors.category && 'border-[2px] border-blue-500'} grid grid-rows-3 grid-cols-3  pl-4  items-center justify-evenly  mb-8 rounded-2xl w-[80%] h-[70%] bg-white`}>
+            <div className={`${state?.fieldErrors.category && 'overflow-auto border-[2px] border-blue-500'} p-1  grid grid-rows-4 grid-cols-3  pl-3  items-center justify-evenly  mb-8 rounded-2xl w-[80%] h-[70%] bg-white`}>
                 <Items category={category} handleCategorySelect={handleCategorySelect} />
             </div>
         <div className='p-8 flex-col rounded-t-xl h-[10%] w-full flex justify-evenly  items-center'>

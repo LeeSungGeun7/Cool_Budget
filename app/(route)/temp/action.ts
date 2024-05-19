@@ -1,11 +1,7 @@
 "use server"
-import { date, z } from "zod";
-import moment from 'moment';
+import {  z } from "zod";
 import { request, gql  } from "graphql-request";
 import { revalidateTag } from "next/cache";
-
-
-
 
 
 
@@ -18,7 +14,11 @@ const budgetSchema = z.object({
     type : z.string()
 })
 
-const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tjxa3o9f/master";
+
+
+// const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tjxa3o9f/master";
+
+const masterURL = "https://ap-northeast-1.cdn.hygraph.com/content/clvj66z0n0s8608w0tjxa3o9f/master";
 
 export async function BudgetFormSend(state : any , formData : FormData) {
     const datas = {
@@ -28,10 +28,8 @@ export async function BudgetFormSend(state : any , formData : FormData) {
         category : formData.get("category"),
         date : formData.get("date") || {},
         type : formData.get("type") === "true" ? "income" : "expense"
-     } 
-     
+    } 
 
-    
     const date = datas.date;
 
 
@@ -51,16 +49,34 @@ export async function BudgetFormSend(state : any , formData : FormData) {
             createTransaction(
               data: {amount: ${datas.amount} , date: "${date}", category: {create: {name: "${datas.category}", type: "${datas.type}"}}, clvuvyv4a0j9h070z6epbaq3r: {connect: {email: "${datas.email}"}}, description: "${datas.description}"}
             ) {
-              id
+              id,
+              category {
+                id
+              }
             }
           }
     `;
+
+
     
-     const result = await request(masterURL , query);    
+     const result:any = await request(masterURL , query);    
     if (result) {
         console.log(result);
+        const publishQuery = gql`
+        mutation MyMutation {
+          publishTransaction(where: {id: "${result.createTransaction.id}"}) {
+            id
+          }
+          publishCategory(where: {id: "${result.createTransaction.category.id}"}) {
+            id
+          }
+        }
+      `;
+        request(masterURL, publishQuery);
+
         revalidateTag("transaction");
     }
      }
+     revalidateTag("transaction");
 
 }

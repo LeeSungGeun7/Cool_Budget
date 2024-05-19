@@ -56,6 +56,8 @@ const nextConfig = {
           }
         ],
       },    
+
+      reactStrictMode: false,
       
       
 };
