@@ -110,20 +110,6 @@ export const authOptions = {
       return session;
     },
     
-    // async signIn({ user, account, profile, email, credentials }:any) {
-    //   // 인증 처리 로직
-      
-    //   const res = await socialRegister(email,`${profile || "defalut"}`,`${ account.provider|| "None"}`)
-    //   // 인증 성공 시
-
-
-    //   return true;
-      
-
-    //   // 인증 실패 시
-    //   return false;
-    // }
-    
   },
 
 

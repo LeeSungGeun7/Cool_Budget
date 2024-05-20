@@ -10,13 +10,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { GET as GetAuth } from "../auth/[...nextauth]/route"
 
-interface Session {
+export interface Session {
     user:{
         email : string
     } 
 } 
 
-interface Props {
+export interface Props {
   type : any ;
   month?: any
   endMonth? : any
@@ -65,7 +65,7 @@ export async function POST(req:NextRequest,res:any) {
   //return NextResponse.json({ message: `${add?.usermodel?.transactions}` })
   const res = JSON.stringify(add.usermodel.transactions);
   console.log(res);
-
+    
   return NextResponse.json(add.usermodel.transactions);
   }
 
