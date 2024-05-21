@@ -85,9 +85,17 @@ export  async function createAccount(prevState:any ,formData: FormData) {
           id
         }
       }`; 
-      const res = await request(masterURL,query);
+      const res:any = await request(masterURL,query);
       if (res) {
-        redirect('/');
+        const qr = gql`
+        mutation MyMutation {
+          publishUsermodel(where: {id: "${res.createUsermodel.id}"}){
+            id
+          }
+        }
+        `
+        await request(masterURL,qr);
+        redirect('/login');    
       }
       else {
         false

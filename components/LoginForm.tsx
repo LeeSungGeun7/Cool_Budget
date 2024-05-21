@@ -1,6 +1,8 @@
 "use client"
 import { Login } from '@/app/(route)/login/action';
+import { SignInResponse } from '@/type/login/type';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react'
 import { useState } from 'react'
 
@@ -10,25 +12,26 @@ function LoginForm() {
     const [loading , setLoading] = useState(false);
     const emailInput = useRef<HTMLInputElement>(null);
     const passwordInput = useRef<HTMLInputElement>(null);
-    
 
+    const route = useRouter();
     async function handleLogin() {
-        
+    
         if (email.length > 1 && password.length > 1) {
         setLoading(true);    
        // const res = await Login(email,password);
         setLoading(false);    
  
-        const res = await signIn('credentials',{
+        const res:any = await signIn('credentials',{
             email: email,
-            password: password
+            password: password,
+            redirect: false,
         })
-
-        if (res?.ok) {
-            alert("로그인성공")
+        if (res?.ok === true ) {
+            route.push('/')
         } else {
             alert("실패")
         }
+    
         
     }   else if (email.length < 1) {
         if ( emailInput.current) {

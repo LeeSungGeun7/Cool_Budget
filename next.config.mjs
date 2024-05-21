@@ -1,9 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    
     env:{
       NEXTAUTH_SECRET:"WABCnWuLX1htQ9nA3LNycvfugzVUdKADzNAv9TG2zo8=",
     } , 
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "**",
+        },
+        {
+          protocol: "http",
+          hostname: "**"
+        }
+      ],
+    },    
+
+    
     async headers() {
         return [
             {
@@ -19,6 +32,14 @@ const nextConfig = {
             {
               // imagedelivery.net 도메인 허용
               source: "/k.kakaocdn.net/:path*",
+              headers: [
+                { key: "Access-Control-Allow-Credentials", value: "true" },
+                { key: "Access-Control-Allow-Origin", value: "*" },
+                { key: "Access-Control-Allow-Methods", value: "GET" },
+              ]
+            },
+            {
+              source: "/imagedelivery.net/:path*",
               headers: [
                 { key: "Access-Control-Allow-Credentials", value: "true" },
                 { key: "Access-Control-Allow-Origin", value: "*" },
@@ -44,19 +65,7 @@ const nextConfig = {
           }
         ];
       },
-      images: {
-        remotePatterns: [
-          {
-            protocol: "https",
-            hostname: "**",
-          },
-          {
-            protocol: "http",
-            hostname: "**"
-          }
-        ],
-      },    
-
+      
       reactStrictMode: false,
       
       

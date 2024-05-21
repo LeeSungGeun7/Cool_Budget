@@ -1,13 +1,34 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/about-2', request.url))
+export async function middleware(req: NextRequest) {
+  const session = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+    secureCookie: process.env.NODE_ENV === 'production',
+  });
+
+  const { pathname, origin } = req.nextUrl;
+
+  // 로그인 페이지 경로
+  const isLoginPage = pathname === '/login';
+
+  const isValid = pathname === '/chart'
+  // 세션이 있고 로그인 페이지에 접근하려 할 경우
+  if (session && isLoginPage) {
+    return NextResponse.redirect(`${origin}`);
+  }
+
+  if (!session && isValid) {
+    return NextResponse.redirect(`/login`);
+  }
+
+  // 다른 페이지에 대한 처리는 여기에 추가할 수 있습니다.
+
+  return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/about/:path*',
-}
-
+  matcher: ['/login','/chart','/temp'],
+};

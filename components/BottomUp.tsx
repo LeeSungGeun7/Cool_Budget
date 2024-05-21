@@ -82,20 +82,6 @@ const BottomUp = memo(({isOpen,setIsOpen}:BottomProps) => {
 
     if (isOpen) {
         return (
-            // <motion.div 
-            // drag="y"
-            // dragConstraints={{ top: 0, bottom: 0 }}
-            // className='fixed bottom-0 rounded-t-3xl w-screen h-[90%] z-[500]  bg-white'
-            // initial={{y: '100%'}}
-            // animate={{ y: 0 }}
-            // transition={{ duration: 0.3, ease: 'easeInOut' }}
-            
-            // >
-            //     <div className='w-full flex justify-between'>
-            //         <button onClick={()=>{setIsOpen()}}>dssssX</button>
-                    
-            //     </div>
-            // </motion.div>
             <motion.form 
     ref={formRef}    
     drag="y"

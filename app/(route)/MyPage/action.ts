@@ -2,6 +2,7 @@
 
 import { GET as GetAuth } from "@/app/api/auth/[...nextauth]/route"
 import { Session } from "@/app/api/budget/route"
+import { Image } from "@/type/login/type";
 import request, { gql } from "graphql-request";
 
 
@@ -41,6 +42,66 @@ export interface userData  {
 
 
 
+
+
+
+export const getImageUrl = async () => {
+    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ID}/images/v2/direct_upload`,
+        {
+            method:"POST",
+            headers: {
+                Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`
+            },
+        }
+    )
+    if (!response.ok) {
+        throw new Error(JSON.stringify(await response.json()))
+    } 
+    const data = await response.json();
+    return data.result.uploadURL;
+}
+
+export const postImageCloud = async (form:FormData) => {
+    const imgUrl = await getImageUrl();
+    console.log(form,imgUrl);
+    const res = await fetch(`${imgUrl}`,{
+        method:"POST",
+        headers: {
+            'Authorization' : `Bearer ${process.env.CLOUDFLARE_TOKEN as string}`
+        },
+        body: form
+    })
+    const response:Image = await res.json();
+    return response.result.id;
+}
+
+
+
+export const changeUserAvatar = async (imgUrl : string) => {
+     const session:Session | null = await getServerSession(GetAuth)
+    if (session) {
+    const query = gql`
+    mutation MyMutation {
+        updateUsermodel(data: {avatar: "${imgUrl}"}, where: {email: "${session.user.email}"}) {
+          id
+        }
+      }`;   
+    const id = await request(masterURL,query) 
+    
+    if (id) {
+    const qr =gql`
+    mutation MyMutation {
+        publishUsermodel(where: {email: "${session.user.email}"}) {
+          id
+        }
+    }`;
+    await request(masterURL,qr);
+    } 
+}
+}
+
+
+
 export const getUserData = async () => {
     const session:Session | null = await getServerSession(GetAuth)
 
@@ -61,7 +122,7 @@ export const getUserData = async () => {
     }
 
     else {
-        console.log("세션이 없습니다.")
+        return
     }
 }
 
@@ -113,7 +174,7 @@ export const getChecknickname = async (prevState:any,form:FormData) => {
             }
           }`;
         const res:any = await request(masterURL,query)
-    
+ 
     if (res.updateUsermodel) {
     const qr =gql`
     mutation MyMutation {
