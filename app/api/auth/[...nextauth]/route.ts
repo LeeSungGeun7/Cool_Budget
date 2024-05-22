@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 import NaverProvider from 'next-auth/providers/naver';
 import GoogleProvider from 'next-auth/providers/google';
@@ -7,7 +7,7 @@ import { Login } from '@/app/(route)/login/action';
 
 // 필요에 따라 Provider를 추가할 수 있습니다.
 
-import { User } from "next-auth"
+import { User  } from "next-auth"
 import { isExistUser, socialRegister } from '@/app/(route)/register/action';
 
 interface CustomUser extends User {
@@ -43,7 +43,7 @@ export interface User2 {
 
 
 
-export const authOptions = {
+export const authOptions:NextAuthOptions = {
     pages: {
         signIn: '/',
       },
