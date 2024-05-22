@@ -32,7 +32,7 @@ interface Props {
 
 
 const Input= memo(forwardRef<HTMLInputElement,Props>(({checkComplete,title,label,name,type}:Props,ref) => {
-
+    Input.displayName = "TempInput"
     return(
         <>
         <div className='ml-0 m-2 flex justify-center items-center w-full bg-white rounded-2xl h-[50px]'>
@@ -46,6 +46,7 @@ const Input= memo(forwardRef<HTMLInputElement,Props>(({checkComplete,title,label
 
 
 const Items = memo(({category,handleCategorySelect}:any) => {
+    Items.displayName = "TempItems"
     return(
     category.map((item:any,idx:number)=>{
         return(
