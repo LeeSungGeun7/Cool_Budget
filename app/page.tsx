@@ -31,13 +31,15 @@ export const users = [
   // Rest of the users...
 ];
 
-export const Scroll = () => {
+export default function Page() {
   return (
     <div className="flex flex-col bg-white h-screen w-screen">
       <ScrollCore />
     </div>
   );
 };
+
+
  const ScrollCore = () => {
   const { scrollYProgress } = useScroll();
 
@@ -60,7 +62,7 @@ export const Scroll = () => {
   );
 };
 
-export const Header = ({ translate }: any) => {
+const Header = ({ translate }: any) => {
   return (
     <motion.div
       style={{
@@ -78,10 +80,10 @@ export const Header = ({ translate }: any) => {
   );
 };
 
-export default ScrollCore;
 
 
-export const Card = ({
+
+const Card = ({
   rotate,
   scale,
   translate,
