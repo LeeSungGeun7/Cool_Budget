@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === 'production',
   });
-  const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000' ; 
+  const host = process.env.NODE_ENV === 'production' ? 'https://cool-budget.vercel.app' : 'http://localhost:3000' ; 
 
 
   const { pathname, origin } = req.nextUrl;
