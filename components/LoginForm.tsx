@@ -1,6 +1,4 @@
 "use client"
-import { Login } from '@/app/(route)/login/action';
-import { SignInResponse } from '@/type/login/type';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react'

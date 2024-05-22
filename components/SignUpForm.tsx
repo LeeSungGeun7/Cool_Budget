@@ -1,6 +1,6 @@
 "use client"
 import  { checkPassword, checkVerificationCode, createAccount, isDuplicateEmail, sendVerificationCode}  from '@/app/api/signUp/action';
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { debounce } from 'lodash';
 import { useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';

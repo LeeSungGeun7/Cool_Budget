@@ -1,15 +1,17 @@
 "use client"
 import useIsMobile from '@/use/useIsMobile';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import LinkClick from './LinkClick';
 import { FaPlus } from "react-icons/fa6";
 import BottomUp from './bottomUp';
 import { MdOutlineMail } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa6";
+import { useRecoilState} from 'recoil';
+import { BottomState } from '@/atom/BottomState';
 
 
 
-const Icon = ({name,children}:any) => {
+const Icon = ({children}:any) => {
   return(
     <>
       <div className='flex justify-center items-center m-2 w-[50px] h-[50px] rounded-full border-[1px] border-white bg-black text-white'>
@@ -23,12 +25,14 @@ const Icon = ({name,children}:any) => {
 
 function Footer() {
   const isMobile = useIsMobile()
-  const [bottomUp , setBottomUp] = useState(false);
+  
+  //const [bottomUp , setBottomUp] = useState(false);
+  
+  const [bottomUp,setBottomUp] = useRecoilState(BottomState)
+
 
   const LinkComponent = ' w-[25%] h-[100%] flex justify-center items-center m-4'
   
-
-
 
   if (isMobile && !bottomUp) {
     return(
@@ -36,7 +40,7 @@ function Footer() {
     <div className='relative text-white flex justify-evenly items-center w-full h-[70px] '>
         <LinkClick className={`${LinkComponent}`} href='' name='1' />
         <LinkClick className={`${LinkComponent}`} href='login' name='2' />
-        <button onClick={()=>{setBottomUp(!bottomUp);console.log(bottomUp)}} className='flex text-white items-center justify-center rounded-full  absolute  w-[50px] h-[50px] bg-black'><FaPlus/></button>
+        <button onClick={()=>{setBottomUp(true);console.log(bottomUp)}} className='flex text-white items-center justify-center rounded-full  absolute  w-[50px] h-[50px] bg-black'><FaPlus/></button>
         <LinkClick className={`${LinkComponent}`} href='' name='3' />
         <LinkClick className={`${LinkComponent}`} href='' name='4' />
     </div>
@@ -48,10 +52,9 @@ function Footer() {
         // <div className='bottom-0 fixed w-full h-[500px] bg-white'>
         //   <BottomUp isOpen={bottomUp}/>
         // </div> 
-        <BottomUp setIsOpen={()=>{setBottomUp(false)}} isOpen={bottomUp}/>
-            
+        <BottomUp />
+   
       )
-
   }  
 
   else {

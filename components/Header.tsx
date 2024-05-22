@@ -1,5 +1,4 @@
 "use client"
-import { getUserData, userData } from '@/app/(route)/MyPage/action';
 import useIsMobile from '@/use/useIsMobile';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';

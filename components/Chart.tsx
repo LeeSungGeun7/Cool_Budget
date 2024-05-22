@@ -1,6 +1,6 @@
 "use client"
-import React, { Suspense, use, useCallback, useMemo, useState } from 'react'
-import { useEffect, useRef } from 'react';
+import React, {  useState } from 'react'
+import { useEffect } from 'react';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from "chart.js";
 import {Doughnut} from "react-chartjs-2";
 import Skeleton from 'react-loading-skeleton';

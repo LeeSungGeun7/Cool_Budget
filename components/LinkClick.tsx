@@ -1,6 +1,5 @@
 "use client"
-import { getProviders, signIn } from "next-auth/react";
-import Link from '@/node_modules/next/link';
+import {  signIn } from "next-auth/react";
 import Image from 'next/image';
 import React from 'react'
 import { useRouter } from "next/navigation";
