@@ -65,3 +65,15 @@ console.log("My name is " + JSON.stringify(obj));
 getServersession 을 layout에 선언하여 
 서버에서 받아온 세션을 헤더에 props 넘겨주어
 클라이언트와 세션 병합을 해서 깜박임 해결 
+
+
+
+
+
+--- 참조 사이트 
+메인페이지 스크롤 이벤트
+https://www.freecodecamp.org/news/create-scroll-animations-with-framer-motion-and-react/
+
+Next.js 공식문서 
+
+

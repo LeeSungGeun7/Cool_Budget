@@ -8,21 +8,39 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === 'production',
   });
+  const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000' ; 
+
 
   const { pathname, origin } = req.nextUrl;
 
   // 로그인 페이지 경로
-  const isLoginPage = pathname === '/login';
-
-  const isValid = pathname === '/chart'
+  const isLoginPage = req.nextUrl.pathname === '/login';
+  const isRegister = req.nextUrl.pathname === '/register';
+  const isChartPage = req.nextUrl.pathname === '/chart';
+  const isMyPage = req.nextUrl.pathname === '/MyPage';
+  const isTemp = req.nextUrl.pathname === '/temp';
   // 세션이 있고 로그인 페이지에 접근하려 할 경우
-  if (session && isLoginPage) {
-    return NextResponse.redirect(`${origin}`);
+  console.log(session+"<<<세션");
+  if (session) {
+    if(isLoginPage) {
+      console.log('ddd')
+      return NextResponse.redirect(`${origin}`);
+    }
+    if (isRegister) {
+      console.log('xxx');
+      return NextResponse.redirect(`${origin}`);
+    }
+  }
+ 
+  
+  
+  if(!session) {
+     if(isChartPage || isTemp || isMyPage) {
+      return NextResponse.redirect(`${host}/login`);
+     }
   }
 
-  if (!session && isValid) {
-    return NextResponse.redirect(`/login`);
-  }
+  
 
   // 다른 페이지에 대한 처리는 여기에 추가할 수 있습니다.
 
@@ -30,5 +48,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login','/chart','/temp'],
+  matcher: ['/login','/chart','/temp','/MyPage','/register'],
 };
