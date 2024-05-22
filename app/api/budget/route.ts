@@ -22,7 +22,7 @@ export interface Props {
 
 const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tjxa3o9f/master"
 
-export async function POST(req:NextRequest,res:any) {
+export async function POST(req:NextRequest) {
   const session:Session | null = await getServerSession(GetAuth)
   
   const body =  await req.json();  
@@ -67,24 +67,27 @@ export async function POST(req:NextRequest,res:any) {
 
 
   if (!session) {
-    return NextResponse.json({ message: `인증 되지 않은 사용자 입니다.` } )
+    return
+    // return NextResponse.json({ message: `인증 되지 않은 사용자 입니다.` ,ok:false} )
   }
   
 }
 
 
 
-export  async function GET(res:NextRequest) {
-    const session:Session | null = await getServerSession(GetAuth)
-    if (session) {
-        return NextResponse.json({ message: `인증 사용자 입니다.` } )
-    }
-    if (!session) {
-        return NextResponse.json({ message: `인증 되지 않은 사용자 입니다.` } )
-    }
+// export  async function GET(res:NextRequest) {
+//     const session:Session | null = await getServerSession(GetAuth)
+//     if (session) {
+//         return 
+//         return NextResponse.json({ message: `인증 사용자 입니다.` } )
+//     }
+//     if (!session) {
+//       return
+//         return NextResponse.json({ message: `인증 되지 않은 사용자 입니다.` } )
+//     }
       
-    return res;
-}
+//     return res;
+// }
 
 
 
