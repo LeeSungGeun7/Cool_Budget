@@ -1,35 +1,9 @@
 "use client"
+import { users } from '@/common/literal';
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 
-export const users = [
-  {
-    name: '메인페이지',
-    designation: 'Founder, Algochurn',
-    image: 'https://imagedelivery.net/6i45l_k8v6cNrhGva7A6BA/91434b56-9194-48c9-62d8-25290d8fa400/medium',
-    badge: 'Main',
-  },
-  {
-    name: '차트',
-    designation: "Founder, Sarah's Kitchen",
-    image: 'https://imagedelivery.net/6i45l_k8v6cNrhGva7A6BA/9d1a2e67-f2ae-4d7d-adc1-73659bbfef00/medium',
-    badge: 'chart',
-  },
-  {
-    name: '생성',
-    designation: 'Founder, Algochurn',
-    image: 'https://imagedelivery.net/6i45l_k8v6cNrhGva7A6BA/d12d5f29-d7fa-4de7-f6fa-106c54fbba00/medium',
-    badge: 'temp',
-  },
-  {
-    name: '관리',
-    designation: "Founder, Sarah's Kitchen",
-    image: 'https://imagedelivery.net/6i45l_k8v6cNrhGva7A6BA/e8bfb108-4105-4da1-2bb6-64a319088600/medium',
-    badge: 'login',
-  },
-  // Rest of the users...
-];
 
 export default function Page() {
   return (
