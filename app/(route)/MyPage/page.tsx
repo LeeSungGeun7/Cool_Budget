@@ -14,7 +14,7 @@ import Pending from './component/Pending';
 
 
 
-function page() {  
+function Page() {  
   const imgRef = useRef<any>(null);
     
   const [userData,setUserData] = useState({
@@ -121,4 +121,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

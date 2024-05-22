@@ -62,6 +62,8 @@ const Items = memo(({category,handleCategorySelect}:any) => {
 const Page = memo(() => {
     const user = useSession()
 
+    Page.displayName = 'TempPage';
+
     const [today, setToday] = useState(moment(new Date).format('YYYY-MM-DD'));
 
     

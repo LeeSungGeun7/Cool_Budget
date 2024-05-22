@@ -19,6 +19,8 @@ const Div = () => {
 const Home = React.memo(() => {
   const date = moment();
 
+  Home.displayName = 'ChartPage';
+
   const week = date.subtract(7,"day").format('YYYY-MM-DD');
 
   

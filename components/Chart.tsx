@@ -42,7 +42,7 @@ const List = ({data}:any) => {
         const datedd = dated.format(`DD ${arr[dateY]}`);
         if( !category) {
           return(
-            <div>{data}</div>
+            <div key={idx}>{data}</div>
           )
         }
         return(
@@ -74,7 +74,7 @@ const List = ({data}:any) => {
 const Chart = React.memo(({month,type,endMonth}:Props) => {
     const [loading, setLoading] = useState(true);
 
-    
+    Chart.displayName = 'Chart';  
 
     const fetchData = async (type?:string) => {
       setLoading(true)

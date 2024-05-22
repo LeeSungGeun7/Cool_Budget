@@ -14,7 +14,8 @@ interface BottomProps {
 
 
 const BottomUp = memo(() => {
-
+    BottomUp.displayName = 'BottomUp';
+    
     const isOpen = useRecoilState(BottomState)
 
 
