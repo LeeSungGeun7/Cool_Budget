@@ -43,7 +43,7 @@ export interface User2 {
 
 
 
-export const authOptions:NextAuthOptions = {
+const authOptions = {
     pages: {
         signIn: '/',
       },
