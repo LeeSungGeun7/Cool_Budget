@@ -1,11 +1,9 @@
-
-
 import LinkClick from '@/components/LinkClick'
 import LoginForm from '@/components/LoginForm';
 import React from 'react'
-import kakao from '/Users/sk/dev/Next/easy-balance/public/icon/kakaoLogin.png';
-import naver from '/Users/sk/dev/Next/easy-balance/public/icon/NaverLogin.png';
-import google from '/Users/sk/dev/Next/easy-balance/public/icon/googleLogin.png';
+import kakao from '@/public/kakaoLogin.png';
+import naver from '@/public/NaverLogin.png';
+import google from '@/public/googleLogin.png';
 import Link from 'next/link';
 interface FormData {
     id : string ; 
@@ -16,7 +14,6 @@ interface FormData {
 function page() {
   
   
-
   return (
     <div className='flex h-screen justify-center items-center w-full bg-slate-100'>
         <div className='p-10 pt-0 flex justify-evenly items-center flex-col rounded-md  w-[80%] h-[90%] bg-white'>

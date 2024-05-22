@@ -3,11 +3,12 @@ import useIsMobile from '@/use/useIsMobile';
 import React from 'react'
 import LinkClick from './LinkClick';
 import { FaPlus } from "react-icons/fa6";
-import BottomUp from './bottomUp';
+
 import { MdOutlineMail } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa6";
 import { useRecoilState} from 'recoil';
 import { BottomState } from '@/atom/BottomState';
+import BottomUp from './BottomUp';
 
 
 
@@ -26,7 +27,6 @@ const Icon = ({children}:any) => {
 function Footer() {
   const isMobile = useIsMobile()
   
-  //const [bottomUp , setBottomUp] = useState(false);
   
   const [bottomUp,setBottomUp] = useRecoilState(BottomState)
 
