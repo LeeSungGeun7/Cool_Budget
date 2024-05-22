@@ -1,10 +1,7 @@
 import { TransactionData } from "@/type/transaction/type";
-import { JsonObject, JsonValue } from "@prisma/client/runtime/library";
 import { gql, request } from "graphql-request";
-import moment, { Moment } from "moment";
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest } from "next"
 import { getServerSession } from "next-auth/next"
-
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -30,11 +27,10 @@ export async function POST(req:NextRequest,res:any) {
   
   const body =  await req.json();  
   
-  console.log(body+"<<<<<<<<<<<<<<<<")
   
   const { type , month , endMonth }:Props  = body
 
-  console.log(month,endMonth);  
+
 
   if (session) {
     const query = gql`  
@@ -63,8 +59,8 @@ export async function POST(req:NextRequest,res:any) {
   const add:TransactionData = await request(masterURL as string,query);    
   
   //return NextResponse.json({ message: `${add?.usermodel?.transactions}` })
-  const res = JSON.stringify(add.usermodel.transactions);
-  console.log(res);
+  //const res = JSON.stringify(add.usermodel.transactions);
+
     
   return NextResponse.json(add.usermodel.transactions);
   }
@@ -78,7 +74,7 @@ export async function POST(req:NextRequest,res:any) {
 
 
 
-export  async function GET(res:NextApiRequest) {
+export  async function GET(res:NextRequest) {
     const session:Session | null = await getServerSession(GetAuth)
     if (session) {
         return NextResponse.json({ message: `인증 사용자 입니다.` } )

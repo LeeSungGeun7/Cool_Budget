@@ -7,7 +7,8 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Jua } from "next/font/google";
 import { getUserData, userData } from "./(route)/MyPage/action";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import {GET as authOptions } from "./api/auth/[...nextauth]/route";
+
 import "./globals.css";
 
 
