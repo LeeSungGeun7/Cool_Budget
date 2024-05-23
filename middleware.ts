@@ -20,14 +20,14 @@ export async function middleware(req: NextRequest) {
   const isMyPage = req.nextUrl.pathname === '/MyPage';
   const isTemp = req.nextUrl.pathname === '/temp';
   // 세션이 있고 로그인 페이지에 접근하려 할 경우
-  console.log(session+"<<<세션");
+
   if (session) {
     if(isLoginPage) {
-      console.log('ddd')
+
       return NextResponse.redirect(`${origin}`);
     }
     if (isRegister) {
-      console.log('xxx');
+
       return NextResponse.redirect(`${origin}`);
     }
   }

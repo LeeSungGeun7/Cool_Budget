@@ -1,8 +1,8 @@
 import { TransactionData } from "@/type/transaction/type";
 import { gql, request } from "graphql-request";
-import { NextApiRequest } from "next"
 import { getServerSession } from "next-auth/next"
 import { NextRequest, NextResponse } from "next/server";
+
 
 
 import { GET as GetAuth } from "../auth/[...nextauth]/route"
@@ -24,13 +24,13 @@ const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tj
 
 export async function POST(req:NextRequest) {
   const session:Session | null = await getServerSession(GetAuth)
-  
+
   const body =  await req.json();  
   
   
   const { type , month , endMonth }:Props  = body
 
-
+ 
 
   if (session) {
     const query = gql`  
@@ -51,6 +51,7 @@ export async function POST(req:NextRequest) {
             amount
             description
             date
+            id
           }
     }  
     }
@@ -60,7 +61,7 @@ export async function POST(req:NextRequest) {
   
   //return NextResponse.json({ message: `${add?.usermodel?.transactions}` })
   //const res = JSON.stringify(add.usermodel.transactions);
-
+  console.log(JSON.stringify(add)+"<<<받아온데이터");  
     
   return NextResponse.json(add.usermodel.transactions);
   }

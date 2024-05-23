@@ -16,9 +16,9 @@ const budgetSchema = z.object({
 
 
 
-// const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tjxa3o9f/master";
+ const masterURL = "https://api-ap-northeast-1.hygraph.com/v2/clvj66z0n0s8608w0tjxa3o9f/master";
 
-const masterURL = "https://ap-northeast-1.cdn.hygraph.com/content/clvj66z0n0s8608w0tjxa3o9f/master";
+//const masterURL = "https://ap-northeast-1.cdn.hygraph.com/content/clvj66z0n0s8608w0tjxa3o9f/master";
 
 export async function BudgetFormSend(state : any , formData : FormData) {
     const datas = {
@@ -74,9 +74,48 @@ export async function BudgetFormSend(state : any , formData : FormData) {
       `;
         request(masterURL, publishQuery);
 
-        revalidateTag("transaction");
+
     }
      }
-     revalidateTag("transaction");
+    //  revalidateTag("transaction");
 
 }
+
+
+export async function DeleteItems(ids:any) {
+  for (let i of ids) {
+    let s = i.replace(/'/g, "");
+
+    const query = gql`
+    mutation MyMutation {
+      deleteTransaction(where: {id: "${s}"}) {
+        category {
+          id
+        }
+      }
+    }
+    `;
+   const categoryId:{deleteTransaction: {category:{id:string}} } = await request(masterURL,query);
+   const cateId = categoryId.deleteTransaction.category.id.replace(/'/g, "");
+
+   if (categoryId) {
+
+   const qr = gql`
+   mutation MyMutation {
+    deleteCategory(where: {id: "${cateId}"}) {
+      id
+    }
+  }`;
+  const res:any = await request(masterURL,qr);
+
+   }
+     
+  } 
+  revalidateTag("transaction");
+  return "삭제완료";
+}
+
+
+// 수정 , 갤러리 기능(추가), 
+// react - java spring boot 재배포 
+// 
