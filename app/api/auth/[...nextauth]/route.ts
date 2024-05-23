@@ -43,7 +43,7 @@ export interface User2 {
 
 
 
-export const authOptions = {
+const authOptions = {
     pages: {
         signIn: '/',
       },
@@ -101,7 +101,8 @@ export const authOptions = {
       
       return { ...token, ...user };
     },
-    
+
+
     async session({ session, token }:any) {
       console.log(token);
       if (token) {

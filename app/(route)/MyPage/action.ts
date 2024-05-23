@@ -1,6 +1,6 @@
 "use server"
-
-import { authOptions, GET as GetAuth, User1 } from "@/app/api/auth/[...nextauth]/route"
+// authOptions,
+import {  GET as GetAuth, User1 } from "@/app/api/auth/[...nextauth]/route"
 import { Session } from "@/app/api/budget/route"
 import { Image } from "@/type/login/type";
 import { getOAuthProvider } from "@/util/getOAuthProvider";
@@ -201,7 +201,7 @@ NextResponse.json({message:"세션이 없는 사용자 입니다."})
 
 
 export async function deleteUser() {
-    const session:User1 | null = await getServerSession(authOptions)
+    const session:User1 | null = await getServerSession(GetAuth)
     const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
     const kakaoAdminKey = "17c37bfdcd18309ee75b12ade767f05c";
