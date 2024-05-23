@@ -124,7 +124,7 @@ export const authOptions = {
 
 
 
-export const GET = NextAuth(authOptions)
+export const GET = authOptions
 
 export const POST = NextAuth(authOptions)
 
