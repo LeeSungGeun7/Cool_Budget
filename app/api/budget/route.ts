@@ -9,7 +9,8 @@ import { GET as GetAuth } from "../auth/[...nextauth]/route"
 
 export interface Session {
     user:{
-        email : string
+        email : string,
+        id: any,
     } 
 } 
 

@@ -48,7 +48,7 @@ export default async function RootLayout({
       <body className={inter.className} >
         <RecoilRootWrapper>
       
-      <Header avatar={avatar && avatar.usermodel.avatar} session={props.session}/>
+      <Header avatar={avatar && avatar.usermodel?.avatar} session={props.session}/>
         <div className="flex w-screen h-auto">
           <SideBar/>
             {children}

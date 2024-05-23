@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 import NaverProvider from 'next-auth/providers/naver';
 import GoogleProvider from 'next-auth/providers/google';
@@ -43,7 +43,7 @@ export interface User2 {
 
 
 
-const authOptions = {
+export const authOptions = {
     pages: {
         signIn: '/',
       },
@@ -98,15 +98,22 @@ const authOptions = {
         }
       
       }
+      
       return { ...token, ...user };
     },
-
+    
     async session({ session, token }:any) {
+      console.log(token);
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
 
       session.user = token as any;
-
       await socialRegister(session.user.email,`${session.user.picture || "defalut"}`,"social")
-
+      console.log(session);
       return session;
     },
     
@@ -114,6 +121,8 @@ const authOptions = {
 
 
 };
+
+
 
 export const GET = NextAuth(authOptions)
 

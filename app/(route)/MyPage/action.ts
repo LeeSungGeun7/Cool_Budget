@@ -1,8 +1,9 @@
 "use server"
 
-import { GET as GetAuth } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions, GET as GetAuth, User1 } from "@/app/api/auth/[...nextauth]/route"
 import { Session } from "@/app/api/budget/route"
 import { Image } from "@/type/login/type";
+import { getOAuthProvider } from "@/util/getOAuthProvider";
 import request, { gql } from "graphql-request";
 
 
@@ -196,4 +197,47 @@ export const getChecknickname = async (prevState:any,form:FormData) => {
  else {
 NextResponse.json({message:"세션이 없는 사용자 입니다."})
  }
+}
+
+
+export async function deleteUser() {
+    const session:User1 | null = await getServerSession(authOptions)
+    const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
+
+    const kakaoAdminKey = "17c37bfdcd18309ee75b12ade767f05c";
+    const targetIdType = "user_id";
+    const targetId = session?.user.id;
+   
+    
+    const userType = getOAuthProvider(targetId,session?.email);
+
+    if (userType === "kakao") {
+      const kakao = await fetch(`${KAKAO_UNLINK_URI}?target_id_type=${targetIdType}&target_id=${targetId}`,
+        {
+          method:"POST",
+          headers: {
+            'Authorization': `KakaoAK ${kakaoAdminKey}`,
+            "Content-Type" : "application/x-www-form-urlencoded",
+            
+          },
+         });
+       const rsp =  await kakao.json()
+       console.log(JSON.stringify(rsp))
+    }
+    
+    
+
+    const query = gql`
+    mutation MyMutation {
+        deleteUsermodel(where: {email: "${session?.user.email}"}) {
+          id
+        }
+      }      
+    `;
+    const res:{deleteUsermodel:{id:any}} = await request(masterURL,query);
+    
+
+    if (res.deleteUsermodel !== null){
+        return true
+    }
 }
